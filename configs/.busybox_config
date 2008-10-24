@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Busybox version: 1.12.1
-# Thu Oct 23 10:10:13 2008
+# Fri Oct 24 09:53:00 2008
 #
 CONFIG_HAVE_DOT_CONFIG=y
 
@@ -299,7 +299,7 @@ CONFIG_FEATURE_HUMAN_READABLE=y
 #
 # Editors
 #
-# CONFIG_AWK is not set
+CONFIG_AWK=y
 # CONFIG_FEATURE_AWK_MATH is not set
 # CONFIG_CMP is not set
 # CONFIG_DIFF is not set
@@ -308,7 +308,7 @@ CONFIG_FEATURE_HUMAN_READABLE=y
 # CONFIG_FEATURE_DIFF_MINIMAL is not set
 # CONFIG_ED is not set
 # CONFIG_PATCH is not set
-# CONFIG_SED is not set
+CONFIG_SED=y
 CONFIG_VI=y
 CONFIG_FEATURE_VI_MAX_LEN=4096
 CONFIG_FEATURE_VI_8BIT=y
