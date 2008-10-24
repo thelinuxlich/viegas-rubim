@@ -1,0 +1,75 @@
+Viegas Rubim RMS - Embedded System Generator
+
+Vinicius Tinti de Paula Oliveira - vtintipo@gmail.com
+Alisson Cavalcante Agiani - thelinuxlich@gmail.com
+Marcos (insira sobrenome aqui) - marrodbr@yahoo.com.br
+
+REQUERIMENTOS:
+
+	syslinux mkfs build-essential linux-kernel
+
+	Opcional
+	qemu
+
+DOCUMENTAÇÃO:
+
+23/10: Há uma pasta "vm_uclibc" no viegas com um ambiente enjaulado pronto para 
+compilar nossas aplicações de acordo com a uclibc, por isso a rotina de desenvolvimento
+mudou um pouco. Deve-se montar o dispositivo primeiro:
+
+sudo modprobe loop
+mount -o loop vm_uclibc/root_fs_i386.ext2 vm_uclibc/root
+
+E depois transferir para o ambiente enjaulado os sources desejados, dar chroot para lá e 
+configurar/compilar normalmente. Os 5 aplicativos atuais que vêm com o Viegas(busybox,
+opentracker, enhanced ctorrent, ntfs-progs e dropbear) já estão dentro do ambiente enjaulado. Em cada uma
+das pastas de source foi criada uma subpasta seguindo o padrão "aplicativo_binary" que foi utilizada
+para jogar os arquivos necessários da aplicação após a compilação(com ./configure --prefix=/aplicacao/aplicacao_binary/).
+
+Antes de compilar, exportem esta flag que diminui o tamanho do executável final:
+
+export CFLAGS="-Os"
+
+Depois é só conferir as libs necessárias com ldd e copiá-las para a respectiva subpasta em viegas/sources
+
+23/10: Foram adicionados mais dois scripts "extended" para criar uma 
+imagem com todos os aplicativos embutidos, os scripts normais criam apenas
+o sistema básico em um disquete:
+
+
+./build-initrd.sh 	#ambiente simples de 1 disco
+./build-disk.sh 	#ambiente simples de 1 disco
+
+
+./build-extended-initrd.sh 	#ambiente estendido para testes com qemu
+./build-extended-disk.sh	#ambiente estendido para testes com qemu
+
+Depois o arquivo final estará localizado em images/disk.img, para 
+testar sua compilação use qemu images/disk.img
+
+Há também uma pasta configs/ com as configurações atuais do busybox e do kernel 2.6.27.2 para
+análise/tuning.
+
+OBS.: O dropbear foi configurado com:
+./configure --disable-largefile --disable-zlib --disable-syslog --disable-lastlog --prefix=/dropbear-0.51/dropbear_binary/
+
+O ntfs-progs foi configurado com:
+./configure --enable-shared=yes --enable-static=no --prefix=/ntfsprogs-2.0.0/ntfs-binary
+
+No opentracker eu tive que alterar o Makefile para setar "CC=gcc" para compilar com uclibc
+
+Como o ambiente enjaulado não tem ncurses, o comando "make menuconfig" não funciona. Temos que
+gerar a configuração no ambiente normal e depois transferir o arquivo .config para o ambiente enjaulado.
+
+Sempre que possível, vamos compilar com shared libs.
+
+OBS2.: Este ambiente enjaulado tem uma versão meio antiga do uclibc, portanto, compilar nossas
+aplicações lá é como jogar na loteria com 80% de chance de ganhar. Nos outros 20% temos que caçar
+funções não implementadas e desabilitá-las(como clock_gettime do busybox). Eu sei que isso é uma droga,
+ mas venho tentando há duas semanas criar uma toolchain atualizada com buildroot, sem sucesso.
+Se alguém conseguir essa proeza, nossas dores de cabeça vão diminuir bastante :)
+
+OBS3.: Precisamos de um ROADMAP! Eu diria que esta é a versão 0.1a :D
+
+OBS4.: Precisamos de cerveja! Aliás, vamos colocar o Viegas na licença beerware! hehehheheheh
+

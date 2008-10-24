@@ -1,0 +1,4 @@
+#!/bin/sh
+mount -t proc proc /proc
+echo "Aqui será carregado o disco 2"
+exec /sbin/init
