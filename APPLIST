@@ -1,5 +1,17 @@
-busybox 1.12.1
-dropbear 0.51
-ctorrent-dnh 3.3.2
-ntfsprogs 2.0.0
-opentracker rev.1198
+busybox 1.12.1 http://busybox.net/downloads/busybox-1.12.1.tar.bz2
+dropbear 0.51 http://matt.ucc.asn.au/dropbear/releases/dropbear-0.51.tar.bz2
+ctorrent-dnh 3.3.2 http://ufpr.dl.sourceforge.net/sourceforge/dtorrent/ctorrent-dnh3.3.2.tar.gz
+ntfsprogs 2.0.0 http://heanet.dl.sourceforge.net/sourceforge/linux-ntfs/ntfsprogs-2.0.0.tar.bz2
+opentracker rev.1198 cvs
+
+--
+
+CVS opentracker 
+	cvs -d :pserver:cvs@cvs.fefe.de:/cvs -z9 co libowfat
+	cd libowfat
+	make
+	cd ..
+	cvs -d:pserver:anoncvs@cvs.erdgeist.org:/home/cvsroot co opentracker
+	cd opentracker
+	make
+
