@@ -1,8 +1,8 @@
 Viegas Rubim RMS - Embedded System Generator
 
-Vinicius Tinti de Paula Oliveira - vtintipo@gmail.com
 Alisson Cavalcante Agiani - thelinuxlich@gmail.com
-Marcos (insira sobrenome aqui) - marrodbr@yahoo.com.br
+Márcio Rodrigo de Almeida Silva - marrodbr@yahoo.com.br
+Vinicius Tinti de Paula Oliveira - vtintipo@gmail.com
 
 REQUERIMENTOS:
 
@@ -54,7 +54,7 @@ OBS.: O dropbear foi configurado com:
 ./configure --disable-largefile --disable-zlib --disable-syslog --disable-lastlog --prefix=/dropbear-0.51/dropbear_binary/
 
 O ntfs-progs foi configurado com:
-./configure --enable-shared=yes --enable-static=no --prefix=/ntfsprogs-2.0.0/ntfs-binary
+./configure --enable-shared=yes --enable-static=no --prefix=/ntfsprogs-2.0.0/ntfs_binary
 
 No opentracker eu tive que alterar o Makefile para setar "CC=gcc" para compilar com uclibc
 
